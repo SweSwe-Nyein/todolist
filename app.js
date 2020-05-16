@@ -22,6 +22,7 @@ $(document).ready(function(){
         buildTask(task, res.id).appendTo("#tasks");
       }
     }, "json");
+
     $("h1 span").html( $("#tasks li").length );
 
     $("#new-task input").val("").focus();

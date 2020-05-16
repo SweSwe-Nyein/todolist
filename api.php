@@ -1,6 +1,6 @@
 <?php
   function connect(){
-    $dsn = "mysql:dbname=todo";
+    $dsn = "mysql:dbname=tasks";
     $username = "root";
     $password = "";
     try{
@@ -53,14 +53,11 @@
   }
   function add_task(){
     $subject = $_POST['subject'];
-    echo $subject;
     $conn = connect();
-    $sql = "INSERT INTO tasks (subject, status, created_date) VALUES ($subject, 0, now())";
-    // $sql = "INSERT INTO tasks VALUES (5, 'blah2', 0, '2007-11-13')";
+    $sql = "INSERT INTO tasks (subject, status, created_date) VALUES ('$subject', 0, now())";
     try{
       $result = $conn->query( $sql );
-      $task= $result->fetch();
-      $id=$task['id'];
+      $id =  $conn->lastInsertId();
       if($result){
         echo json_encode(array("err" => 0, "id"=>$id));
       }else{
